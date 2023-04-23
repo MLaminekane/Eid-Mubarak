@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <div class="img1"></div>
-    <div class="img2"></div>
-    <div class="img3"></div>
-    <div class="img4"></div>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="img1">
+        <input type="file" id="img1Input" onchange="changeImage('img1')" accept="image/*">
+      </div>
+      <div class="img2">
+        <input type="file" id="img2Input" onchange="changeImage('img2')" accept="image/*">
+      </div>
+      <div class="img3">
+        <input type="file" id="img3Input" onchange="changeImage('img3')" accept="image/*">
+      </div>
+      <div class="img4">
+        <input type="file" id="img4Input" onchange="changeImage('img4')" accept="image/*">
+      </div>
+    </div>
+    <script>
+      function changeImage(imgId) {
+        const imgInput = document.getElementById(`${imgId}Input`);
+        const imgBlock = document.querySelector(`.${imgId}`);
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+          const imageDataUrl = reader.result;
+          imgBlock.style.backgroundImage = `url(${imageDataUrl})`;
+        };
+        reader.readAsDataURL(imgInput.files[0]);
+      }
+    </script>
+  </body>
 </html>
